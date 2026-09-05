@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OpenAI Round1 — PIX automático (QR + copia-cola)</title>
+  <title>OpenAI Round1 — PIX por valor (CRC-ok)</title>
   <style>
     :root { --bg:#0f1419; --card:#1a2332; --text:#e7ecf3; --muted:#9aa8bc; --accent:#10a37f; --border:#2a3548; }
     * { box-sizing: border-box; }
@@ -18,104 +18,86 @@
     ul.offers li:last-child { border-bottom:none; }
     .price { color:var(--accent); font-weight:600; }
     .pix-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1rem; }
-    .pix-card { background:#0c1017; border:1px solid var(--border); border-radius:10px; padding:.85rem; display:flex; flex-direction:column; gap:.5rem; align-items:stretch; }
+    .pix-card { background:#0c1017; border:1px solid var(--border); border-radius:10px; padding:.85rem; display:flex; flex-direction:column; gap:.5rem; }
     .pix-card h3 { margin:0; font-size:1rem; text-align:center; color:var(--accent); }
     .pix-card img { width:min(200px,100%); height:auto; margin:0 auto; border-radius:6px; background:#fff; }
-    .pix-card textarea { width:100%; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.68rem; background:#111827; color:#c8d4e4; border:1px solid var(--border); border-radius:6px; padding:.45rem; resize:vertical; }
+    .pix-card textarea { width:100%; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.62rem; background:#111827; color:#c8d4e4; border:1px solid var(--border); border-radius:6px; padding:.45rem; }
     .pix-card button { background:var(--accent); color:#04140f; border:none; border-radius:8px; padding:.55rem .75rem; font-weight:650; cursor:pointer; }
-    .pix-card button:active { opacity:.85; }
     .note { color:var(--muted); font-size:.88rem; margin:.5rem 0 0; }
-    .sr { position:absolute; left:-9999px; }
+    a { color:#10a37f; }
     footer { margin-top:1rem; color:var(--muted); font-size:.85rem; }
-    .toast { position:fixed; bottom:1rem; left:50%; transform:translateX(-50%); background:var(--accent); color:#04140f; padding:.5rem 1rem; border-radius:999px; font-weight:600; display:none; z-index:9; }
+    .toast { position:fixed; bottom:1rem; left:50%; transform:translateX(-50%); background:var(--accent); color:#04140f; padding:.5rem 1rem; border-radius:999px; font-weight:600; display:none; }
   </style>
 </head>
 <body>
   <main>
-    <h1>OpenAI · ChatGPT web — pagamento PIX</h1>
-    <p class="sub">Recebedor <strong>LUIZ</strong> · QR + copia-cola embutidos · BRL</p>
+    <h1>OpenAI · ChatGPT web — PIX por valor</h1>
+    <p class="sub">Recebedor <strong>LUIZ</strong> · mapa Alpha (EMV) · <strong>qr_0 = R$100</strong> (não R$20)</p>
 
     <section class="card">
       <h2>Ofertas</h2>
       <ul class="offers">
-        <li><span>5 posts + legendas</span><span class="price">R$ 50 / 100</span></li>
-        <li><span>Tutorial passo a passo</span><span class="price">R$ 50 / 100</span></li>
-        <li><span>Plano / roadmap 14 dias</span><span class="price">R$ 50 / 100</span></li>
-        <li><span>Snippet / esqueleto de código</span><span class="price">R$ 50 / 100</span></li>
-        <li><span>Checklist Platform + ChatGPT free</span><span class="price">R$ 50 / 100</span></li>
+        <li><span>5 posts / tutorial / plano / snippet</span><span class="price">R$ 50 / 100</span></li>
       </ul>
+      <p class="note">SKU R$50 → qr_2 · SKU R$100 → qr_3 (EMV 100.00)</p>
     </section>
 
     <section class="card">
-      <h2>Pagar agora (QR + copia-cola)</h2>
+      <h2>Pagar agora</h2>
       <div class="pix-grid">
-
-      <article class="pix-card" id="pix-1">
+      <article class="pix-card">
         <h3>R$ 10</h3>
-        <img src="pix/qr_1.png" alt="QR PIX R$ 10" width="200" height="200" />
-        <label class="sr">PIX copia e cola</label>
-        <textarea readonly rows="3" id="cc-1">00020126330014br.gov.bcb.pix011108030362994520400005303986540510.005802BR5920LUIZ</textarea>
-        <button type="button" data-copy="cc-1">Copiar PIX</button>
+        <img src="pix/qr_4.png" alt="QR PIX R$ 10" width="200" height="200" />
+        <textarea readonly rows="3" id="cc-10">00020126330014br.gov.bcb.pix011108030362994520400005303986540510.005802BR5920LUIZ GUSTAVO CORREIA6009SAO PAULO62090505micro63041306</textarea>
+        <button type="button" data-copy="cc-10">Copiar PIX</button>
       </article>
-      <article class="pix-card" id="pix-0">
+      <article class="pix-card">
         <h3>R$ 20</h3>
-        <img src="pix/qr_0.png" alt="QR PIX R$ 20" width="200" height="200" />
-        <label class="sr">PIX copia e cola</label>
-        <textarea readonly rows="3" id="cc-0">00020126330014br.gov.bcb.pix011108030362994520400005303986540520.005802BR5920LUIZ</textarea>
-        <button type="button" data-copy="cc-0">Copiar PIX</button>
+        <p class="note">QR: use copia-cola (mapa Alpha sem qr R$20 dedicado)</p>
+        <textarea readonly rows="3" id="cc-20">00020126330014br.gov.bcb.pix011108030362994520400005303986540520.005802BR5920LUIZ GUSTAVO CORREIA6009SAO PAULO62100506padrao63043835</textarea>
+        <button type="button" data-copy="cc-20">Copiar PIX</button>
       </article>
-      <article class="pix-card" id="pix-2">
+      <article class="pix-card">
         <h3>R$ 50</h3>
         <img src="pix/qr_2.png" alt="QR PIX R$ 50" width="200" height="200" />
-        <label class="sr">PIX copia e cola</label>
-        <textarea readonly rows="3" id="cc-2">00020126330014br.gov.bcb.pix011108030362994520400005303986540550.005802BR5920LUIZ</textarea>
-        <button type="button" data-copy="cc-2">Copiar PIX</button>
+        <textarea readonly rows="3" id="cc-50">00020126330014br.gov.bcb.pix011108030362994520400005303986540550.005802BR5920LUIZ GUSTAVO CORREIA6009SAO PAULO62080504Pack63044E58</textarea>
+        <button type="button" data-copy="cc-50">Copiar PIX</button>
       </article>
-      <article class="pix-card" id="pix-3">
+      <article class="pix-card">
         <h3>R$ 100</h3>
         <img src="pix/qr_3.png" alt="QR PIX R$ 100" width="200" height="200" />
-        <label class="sr">PIX copia e cola</label>
-        <textarea readonly rows="3" id="cc-3">00020126330014br.gov.bcb.pix0111080303629945204000053039865406100.005802BR5920LUIZ</textarea>
-        <button type="button" data-copy="cc-3">Copiar PIX</button>
+        <textarea readonly rows="3" id="cc-100">00020126330014br.gov.bcb.pix0111080303629945204000053039865406100.005802BR5920LUIZ GUSTAVO CORREIA6009SAO PAULO62120508Apoio1006304C205</textarea>
+        <button type="button" data-copy="cc-100">Copiar PIX</button>
       </article>
-      <article class="pix-card" id="pix-4">
+      <article class="pix-card">
         <h3>R$ 200</h3>
-        <img src="pix/qr_4.png" alt="QR PIX R$ 200" width="200" height="200" />
-        <label class="sr">PIX copia e cola</label>
-        <textarea readonly rows="3" id="cc-4">00020126330014br.gov.bcb.pix0111080303629945204000053039865406200.005802BR5920LUIZ</textarea>
-        <button type="button" data-copy="cc-4">Copiar PIX</button>
+        <img src="pix/qr_1.png" alt="QR PIX R$ 200" width="200" height="200" />
+        <textarea readonly rows="3" id="cc-200">00020126330014br.gov.bcb.pix0111080303629945204000053039865406200.005802BR5920LUIZ GUSTAVO CORREIA6009SAO PAULO62100506Servio63041D17</textarea>
+        <button type="button" data-copy="cc-200">Copiar PIX</button>
       </article>
-      <article class="pix-card" id="pix-5">
+      <article class="pix-card">
         <h3>Livre</h3>
         <img src="pix/qr_5.png" alt="QR PIX Livre" width="200" height="200" />
-        <label class="sr">PIX copia e cola</label>
-        <textarea readonly rows="3" id="cc-5">00020126330014br.gov.bcb.pix0111080303629945204000053039865802BR5920LUIZ</textarea>
-        <button type="button" data-copy="cc-5">Copiar PIX</button>
+        <textarea readonly rows="3" id="cc-livre">00020126330014br.gov.bcb.pix0111080303629945204000053039865802BR5920LUIZ GUSTAVO CORREIA6009SAO PAULO62070503***6304953C</textarea>
+        <button type="button" data-copy="cc-livre">Copiar PIX</button>
       </article>
       </div>
-      <p class="note">Após pagar, envie comprovante + SKU (nicho/tema) para entrega. USD/outras: Binance em breve. Sem top-up de API.</p>
     </section>
 
-    
     <section class="card">
       <h2>Hub multi-IA</h2>
-      <p class="note" style="margin-top:0"><a href="https://ziuluiziul.github.io/round1-cumulunimbus/" style="color:#10a37f">https://ziuluiziul.github.io/round1-cumulunimbus/</a></p>
+      <p class="note" style="margin-top:0"><a href="https://ziuluiziul.github.io/round1-cumulunimbus/">https://ziuluiziul.github.io/round1-cumulunimbus/</a></p>
     </section>
 
-    <footer>OpenAI Round1 · canal próprio · payloads oficiais /workspace/pix-clean/out/</footer>
+    <footer>OpenAI Round1 · PIX por valor CRC-ok · sem índice antigo</footer>
   </main>
   <div class="toast" id="toast">Copiado</div>
   <script>
     document.querySelectorAll("[data-copy]").forEach(btn => {
       btn.addEventListener("click", async () => {
         const el = document.getElementById(btn.getAttribute("data-copy"));
-        const text = el.value;
-        try {
-          await navigator.clipboard.writeText(text);
-        } catch (e) {
-          el.select();
-          document.execCommand("copy");
-        }
+        try { await navigator.clipboard.writeText(el.value); }
+        catch (e) { el.select(); document.execCommand("copy"); }
         const t = document.getElementById("toast");
         t.style.display = "block";
         setTimeout(() => t.style.display = "none", 1200);
